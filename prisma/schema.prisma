@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Location {
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
+  address     String
+  isActive    Boolean           @default(true)
+  availabilities DailyAvailability[]
+  reservations Reservation[]
+  closures    RestaurantClosure[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model TableType {
+  id          Int               @id @default(autoincrement())
+  paxSize     Int
+  description String?
+  isActive    Boolean           @default(true)
+  availabilities DailyAvailability[]
+  reservations Reservation[]    @relation("TableTypeReservations")
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([paxSize])
+}
+
+model DailyAvailability {
+  id               Int        @id @default(autoincrement())
+  locationId       Int
+  date             DateTime
+  timeSlot         String
+  tableTypeId      Int
+  totalTables      Int
+  availableTables  Int
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  location    Location  @relation(fields: [locationId], references: [id])
+  tableType   TableType @relation(fields: [tableTypeId], references: [id])
+  reservations Reservation[]
+
+  @@unique([locationId, date, timeSlot, tableTypeId])
+}
+
+
+
+
+
+
+
+model Reservation {
+  id                   Int               @id @default(autoincrement())
+  bookingCode          String            @unique
+  customerName         String
+  customerPhone        String
+  customerEmail        String?
+  locationId           Int
+  date                 DateTime
+  timeSlot             String
+  requestedPax         Int
+  allocatedTableTypeId Int
+  status               String            @default("PENDING_PAYMENT")
+  paymentStatus        String            @default("UNPAID")
+  paymentReference     String?
+  source               String            @default("WHATSAPP")
+  notes                String?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  location      Location  @relation(fields: [locationId], references: [id])
+  tableType     TableType @relation("TableTypeReservations", fields: [allocatedTableTypeId], references: [id])
+  availability  DailyAvailability? @relation(fields: [availabilityId], references: [id])
+  availabilityId Int?
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model TimeSlot {
+  id        Int      @id @default(autoincrement())
+  slot      String   @unique
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RestaurantClosure {
+  id          Int      @id @default(autoincrement())
+  locationId  Int?     // Optional: if null, applies to ALL locations
+  startDate   DateTime
+  endDate     DateTime
+  reason      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  location    Location? @relation(fields: [locationId], references: [id])
+}
