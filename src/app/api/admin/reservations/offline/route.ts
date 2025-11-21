@@ -55,7 +55,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(reservation);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "Failed to create offline booking" }, { status: 400 });
+    const message = error instanceof Error ? error.message : "Failed to create offline booking";
+    return NextResponse.json({ message }, { status: 400 });
   }
 }
 

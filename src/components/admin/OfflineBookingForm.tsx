@@ -44,7 +44,8 @@ export default function OfflineBookingForm() {
       const data = await res.json();
       setMessage(`Offline booking confirmed: ${data.bookingCode}`);
     } else {
-      setMessage("Failed to create offline booking");
+      const errorData = await res.json();
+      setMessage(errorData.message || "Failed to create offline booking");
     }
   };
 
