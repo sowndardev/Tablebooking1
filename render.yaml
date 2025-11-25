@@ -1,3 +1,4 @@
+# Restaurant Table Booking Application - Render Configuration
 services:
   - type: web
     name: restaurant-booking-app
