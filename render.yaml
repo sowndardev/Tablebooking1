@@ -21,13 +21,6 @@ services:
       - key: JWT_SECRET
         generateValue: true
 
-  - type: psql
-    name: restaurant-db
-    env: postgres
-    plan: free
-    databaseName: restaurant
-    user: admin
-
 databases:
   - name: restaurant-db
     plan: free
