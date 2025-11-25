@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import AdminGuard from "@/components/AdminGuard";
 import DashboardStats from "@/components/admin/DashboardStats";
-import CalendarView from "@/components/admin/CalendarView";
-import ReservationsTable from "@/components/admin/ReservationsTable";
+import AdminCalendarView from "@/components/admin/AdminCalendarView";
+import AdminReservationsTable from "@/components/admin/AdminReservationsTable";
 import EditReservationModal from "@/components/admin/EditReservationModal";
 import DateDetailsModal from "@/components/admin/DateDetailsModal";
 import ReservationDetailsModal from "@/components/admin/ReservationDetailsModal";
@@ -65,12 +65,12 @@ export default function AdminHomePage() {
         <DashboardStats reservations={reservations} />
 
         {view === "calendar" ? (
-          <CalendarView
+          <AdminCalendarView
             reservations={reservations}
             onDateSelect={(date) => setSelectedDate(date)}
           />
         ) : (
-          <ReservationsTable
+          <AdminReservationsTable
             reservations={reservations}
             loading={loading}
             onRefresh={fetchReservations}
