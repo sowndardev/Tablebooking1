@@ -25,6 +25,27 @@ export async function PUT(
     }
 }
 
+// PATCH - Toggle isActive status
+export async function PATCH(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const { isActive } = await req.json();
+        const id = Number(params.id);
+
+        const updated = await prisma.dailyAvailability.update({
+            where: { id },
+            data: { isActive: Boolean(isActive) }
+        });
+
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: "Failed to toggle availability" }, { status: 500 });
+    }
+}
+
 // DELETE - Delete availability slot
 export async function DELETE(
     req: NextRequest,

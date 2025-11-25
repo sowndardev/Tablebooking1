@@ -21,6 +21,7 @@ type Availability = {
     tableTypeId: number;
     totalTables: number;
     availableTables: number;
+    isActive: boolean;
     location: { name: string };
     tableType: { paxSize: number };
 };
@@ -114,6 +115,18 @@ export default function AvailabilityManagementUI() {
         }
     };
 
+    const toggleActive = async (id: number, currentStatus: boolean) => {
+        const res = await fetch(`/api/admin/availability/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ isActive: !currentStatus })
+        });
+
+        if (res.ok) {
+            loadAvailability();
+        }
+    };
+
     return (
         <div className="space-y-6">
             <div>
@@ -173,12 +186,14 @@ export default function AvailabilityManagementUI() {
                             {availability.map((item) => (
                                 <div
                                     key={item.id}
-                                    className="flex items-center justify-between p-4 border border-slate-100 rounded-lg hover:bg-slate-50"
+                                    className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg hover:bg-slate-50 transition-opacity ${!item.isActive ? "opacity-50" : ""
+                                        }`}
                                 >
                                     <div className="flex-1 grid grid-cols-4 gap-4">
                                         <div>
                                             <p className="text-xs text-slate-500">Time Slot</p>
-                                            <p className="font-medium text-slate-900">{item.timeSlot}</p>
+                                            <p className={`font-medium ${!item.isActive ? "text-slate-400 line-through" : "text-slate-900"
+                                                }`}>{item.timeSlot}</p>
                                         </div>
                                         <div>
                                             <p className="text-xs text-slate-500">Table Type</p>
@@ -221,7 +236,21 @@ export default function AvailabilityManagementUI() {
                                         )}
                                     </div>
 
-                                    <div className="flex gap-2 ml-4">
+                                    <div className="flex items-center gap-3 ml-4">
+                                        {/* Toggle Switch */}
+                                        <button
+                                            onClick={() => toggleActive(item.id, item.isActive)}
+                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${item.isActive ? "bg-green-600" : "bg-slate-300"
+                                                }`}
+                                            title={item.isActive ? "Click to disable" : "Click to enable"}
+                                        >
+                                            <span
+                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${item.isActive ? "translate-x-6" : "translate-x-1"
+                                                    }`}
+                                            />
+                                        </button>
+
+                                        {/* Edit/Delete Buttons */}
                                         {editingId === item.id ? (
                                             <>
                                                 <button

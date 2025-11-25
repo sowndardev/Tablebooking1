@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
     where: {
       locationId,
       date,
+      isActive: true,
       availableTables: { gt: 0 },
       tableType: { paxSize: { gte: requestedPax }, isActive: true }
     },
