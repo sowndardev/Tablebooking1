@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AdminGuard from "@/components/AdminGuardComponent";
-import DashboardStats from "@/components/admin/AdminDashboardStats";
-import AdminCalendarView from "@/components/admin/AdminCalendarView";
-import AdminReservationsTable from "@/components/admin/AdminReservationsTable";
+import AdminGuard from "@/components/AdminGuard";
+import DashboardStats from "@/components/admin/DashboardStats";
+import AdminCalendarView from "@/components/admin/CalendarView";
+import AdminReservationsTable from "@/components/admin/ReservationsTable";
 import EditReservationModal from "@/components/admin/EditReservationModal";
 import DateDetailsModal from "@/components/admin/DateDetailsModal";
 import ReservationDetailsModal from "@/components/admin/ReservationDetailsModal";
