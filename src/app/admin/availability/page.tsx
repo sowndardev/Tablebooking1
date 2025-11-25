@@ -1,4 +1,4 @@
-import AdminGuard from "@/components/AdminGuard";
+import AdminGuard from "@/components/AdminGuardComponent";
 import BulkAvailabilityManager from "@/components/admin/BulkAvailabilityManager";
 
 export default function AvailabilityPage() {

@@ -118,7 +118,7 @@ export default function AvailabilityManagementUI() {
         <div className="space-y-6">
             <div>
                 <h1 className="text-2xl font-bold text-slate-900">Manage Availability</h1>
-                <p className="text-sm text-slate-500 mt-1">View and edit existing availability slots</p>
+                <p className="text-sm text-slate-500">Select a date to manage &quot;Daily Availability&quot; or &quot;Closures&quot;.</p>
             </div>
 
             {/* Filters */}
@@ -165,7 +165,7 @@ export default function AvailabilityManagementUI() {
                         <div className="text-center py-8">
                             <p className="text-slate-500">No availability slots found for this date.</p>
                             <p className="text-sm text-slate-400 mt-2">
-                                Use "Daily Availability" to create bulk slots.
+                                Use &quot;Daily Availability&quot; to create bulk slots.
                             </p>
                         </div>
                     ) : (

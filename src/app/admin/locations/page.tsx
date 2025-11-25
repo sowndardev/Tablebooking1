@@ -1,4 +1,4 @@
-import AdminGuard from "@/components/AdminGuard";
+import AdminGuard from "@/components/AdminGuardComponent";
 import LocationsForm from "@/components/admin/LocationsForm";
 
 export default function AdminLocationsPage() {

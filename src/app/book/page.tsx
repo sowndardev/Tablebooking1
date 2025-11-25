@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 type Location = {
@@ -19,7 +19,7 @@ type Slot = {
   paxSize: number;
 };
 
-export default function BookPage() {
+function BookPageContent() {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -244,3 +244,10 @@ export default function BookPage() {
   );
 }
 
+export default function BookPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+      <BookPageContent />
+    </Suspense>
+  );
+}
