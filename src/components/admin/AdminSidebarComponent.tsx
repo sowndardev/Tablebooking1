@@ -13,6 +13,7 @@ export default function AdminSidebar() {
     const links = [
         { href: "/admin", label: "Reservations", icon: "📅" },
         { href: "/admin/offline-booking", label: "Offline Booking", icon: "✍️" },
+        { href: "/admin/customers", label: "Customers (CRM)", icon: "👥" },
         { href: "/admin/setup", label: "Setup", icon: "⚙️" },
         { href: "/admin/availability", label: "Create Availability", icon: "➕" },
         { href: "/admin/manage-availability", label: "Manage Availability", icon: "📋" }
