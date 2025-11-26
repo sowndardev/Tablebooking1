@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { ensureAdmin } from "@/lib/admin-protect";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   const check = ensureAdmin(req);
   if (!check.isAuthorized) return check.response;
