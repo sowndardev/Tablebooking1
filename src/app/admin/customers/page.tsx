@@ -1,6 +1,6 @@
 "use client";
 
-import AdminGuard from "@/components/AdminGuardComponent";
+import AdminGuard from "@/components/AdminGuard";
 import CustomerList from "@/components/admin/CustomerList";
 
 export default function CustomersPage() {
