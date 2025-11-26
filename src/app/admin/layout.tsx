@@ -1,6 +1,6 @@
 "use client";
 
-import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminSidebar from "@/components/admin/AdminSidebarComponent";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
