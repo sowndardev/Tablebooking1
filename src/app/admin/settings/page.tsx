@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AdminGuard from "@/components/AdminGuardComponent";
+import AdminGuard from "@/components/AdminGuard";
 
 type TimeSlot = {
     id: number;

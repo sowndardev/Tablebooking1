@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import AdminGuard from "@/components/AdminGuardComponent";
+import AdminGuard from "@/components/AdminGuard";
 import LocationsForm from "@/components/admin/LocationsForm";
 import TableTypesForm from "@/components/admin/TableTypesForm";
 import TimeSlotManager from "@/components/admin/TimeSlotManager";
